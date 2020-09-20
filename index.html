@@ -19,6 +19,33 @@
       Aplicativo indisponível sem javascript.
     </h3>
   </noscript>
+
+  <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
+
+  <script>
+    var OneSignal = window.OneSignal || [];
+
+    OneSignal.push(function () {
+      OneSignal.init({
+        appId: '15c3dc78-6869-487e-b022-76dc0ddd9520'
+      });
+
+      if (Notification.permission === 'default')
+        OneSignal.showHttpPrompt({ force: true });
+      else if (Notification.permission === 'denied')
+        alert('Notificações bloqueadas. Clique no sino no canto inferior esquerdo da tela para saber como desbloqueá-las.');
+
+      OneSignal.on('notificationDisplay', function (notification) {
+        console.warn('OneSignal notification displayed:', notification);
+      });
+
+      OneSignal.push(function () {
+        OneSignal.on('notificationDismiss', function (notification) {
+          console.warn('OneSignal notification dismiss:', notification);
+        });
+      });
+    });
+  </script>
 <script src="runtime.acf0dec4155e77772545.js" defer></script><script src="polyfills.35a5ca1855eb057f016a.js" defer></script><script src="main.73bc46441f8159bb1fc7.js" defer></script></body>
 
 </html>
